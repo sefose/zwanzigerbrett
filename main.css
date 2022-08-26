@@ -1,0 +1,27 @@
+#board {
+   color: black;
+   border: black;
+   border-width: 2px;
+   border-style: solid;
+   float: left;
+}
+
+#field {
+    height: 100px;
+    width: 100px;
+    border: black;
+    border-width: 2px;
+    border-style: solid;
+}
+
+#column {
+    float: left;
+}
+
+#circle {
+    position: absolute;
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+    background: white;
+}
