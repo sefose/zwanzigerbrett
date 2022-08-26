@@ -6,9 +6,7 @@
    float: left;
 }
 
-#field {
-    height: 100px;
-    width: 100px;
+.field {
     border: black;
     border-width: 2px;
     border-style: solid;
@@ -18,10 +16,13 @@
     float: left;
 }
 
-#circle {
+.circle {
     position: absolute;
     border-radius: 50%;
-    height: 100px;
-    width: 100px;
     background: white;
+}
+
+h1 {
+    text-align: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
