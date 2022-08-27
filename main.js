@@ -1,13 +1,33 @@
-window.onload = function() {
-    for (let index = 0; index < 10; index++) {
-        const column = document.createElement("div");
-        column.setAttribute("id","column");
+const layouts = {
+    "10" : {
+        "title": "Zehnerbrett",
+        "rows": 1,
+        "columns": 10,
+    },
+    "20" : {
+        "title": "Zwanzigerbrett",
+        "rows": 2,
+        "columns": 10,
+    },
+    // "100" : {
+    //     "title": "Hunderterbrett",
+    //     "rows": 10,
+    //     "columns": 10,
+    // },
+};
+
+let currentLayout = "10";
+
+const createBoard = () => {
+    for (let column = 0; column < layouts[currentLayout].columns; column++) {
+        const columnDiv = document.createElement("div");
+        columnDiv.setAttribute("id","column");
         const size = (window.innerWidth-2*4-10*4-12)/10+"px"
-        for (let row = 0; row < 2; row++) {
+        for (let row = 0; row < layouts[currentLayout].rows; row++) {
             const field = document.createElement("div");
             field.setAttribute("class","field");
-            field.setAttribute("name", "i"+index+"r"+row);
-            field.setAttribute("onClick","changeCircle('i"+index+"r"+row+"')");
+            field.setAttribute("name", "c"+column+"r"+row);
+            field.setAttribute("onClick","changeCircle('c"+column+"r"+row+"')");
             field.style.height = size;
             field.style.width = size;
             const circle = document.createElement("div");
@@ -15,10 +35,31 @@ window.onload = function() {
             circle.style.height = size;
             circle.style.width = size;
             field.appendChild(circle);
-            column.appendChild(field); 
+            columnDiv.appendChild(field); 
         }
-        document.getElementById("board").appendChild(column);
+        document.getElementById("board").appendChild(columnDiv);
     }
+    document.title = layouts[currentLayout].title;
+}
+
+const clearBoard = () => {
+    document.getElementById("board").replaceChildren()
+}
+
+const populateBoardChooser = () => {
+    for (const layout in layouts) {
+        entry = document.createElement("div");
+        entry.setAttribute("onClick","changeBoard('"+layout+"')");
+        text = document.createElement("h1");
+        text.innerHTML = layouts[layout].title;
+        entry.appendChild(text);
+        document.getElementById("boardChooser").appendChild(entry);
+    }
+}
+
+window.onload = function() {
+    populateBoardChooser()
+    createBoard();
 }
 
 window.addEventListener("resize", onresize);
@@ -57,4 +98,30 @@ function changeCircle(id) {
             circle.style.background="rgb(255, 255, 255)";
             break;
     }
+}
+
+function getIndexOfKeyFromObject(key, object) {
+    return Object.keys(object).findIndex(e => e === key)
+}
+
+function switchBoard(direction) {
+    const currentIndex = getIndexOfKeyFromObject(currentLayout,layouts)
+    if (direction == "up") {
+        
+    }
+}
+
+const openBoardChooser = () => {
+    document.getElementById("boardChooser").style.display="block";
+}
+
+const closeBoardChooser = () => {
+    document.getElementById("boardChooser").style.display="none";
+}
+
+const changeBoard = (type) => {
+    closeBoardChooser()
+    currentLayout = type
+    clearBoard()
+    createBoard()
 }
