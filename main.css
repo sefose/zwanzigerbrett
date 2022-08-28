@@ -41,22 +41,31 @@
    border-width: 2px;
    border-style: solid;
    float: left;
+   border-radius: 10px;
 }
 
 .field {
     border: black;
     border-width: 2px;
     border-style: solid;
+    border-radius: 50%;
+    background: white;
+    /* margin: 5px; */
 }
 
 #column {
     float: left;
 }
 
-.circle {
-    position: absolute;
+.fiveDiv {
+    border: white;
+    border-width: 0px;
+    border-style: solid;
     border-radius: 50%;
     background: white;
+    /* margin: 5px; */
+    /* width: 10px; */
+
 }
 
 h1 {

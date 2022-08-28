@@ -9,20 +9,39 @@ const layouts = {
         rows: 2,
         columns: 10,
     },
-    // "100" : {
-    //     "title": "Hunderterfeld",
-    //     "rows": 10,
-    //     "columns": 10,
+    // 100: {
+    //     title: "Hunderterfeld",
+    //     rows: 10,
+    //     columns: 10,
     // },
 };
 
 let currentLayout = "10";
 
+const calculateFiveDivMargin = () => {
+    return Math.round(window.innerWidth / 60);
+};
+
+const calculateFieldMargin = () => {
+    return Math.round(window.innerWidth / 200);
+}
+
+const calculateFieldSize = () => {
+    return (window.innerWidth - 2 * 2 - 16 - calculateFiveDivMargin()*2) / 10 - calculateFieldMargin() *2 - 2 * 2;
+};
+
 const createBoard = () => {
-    for (let column = 0; column < layouts[currentLayout].columns; column++) {
+    for (
+        let column = 0;
+        column < layouts[currentLayout].columns + 1;
+        column++
+    ) {
         const columnDiv = document.createElement("div");
         columnDiv.setAttribute("id", "column");
-        const size = (window.innerWidth - 2 * 4 - 10 * 4 - 12) / 10 + "px";
+        const size = calculateFieldSize() + "px";
+        const fieldMargin= calculateFieldMargin() + "px";
+        console.log(size)
+        console.log(fieldMargin)
         for (let row = 0; row < layouts[currentLayout].rows; row++) {
             const field = document.createElement("div");
             field.setAttribute("class", "field");
@@ -33,12 +52,16 @@ const createBoard = () => {
             );
             field.style.height = size;
             field.style.width = size;
-            const circle = document.createElement("div");
-            circle.setAttribute("class", "circle");
-            circle.style.height = size;
-            circle.style.width = size;
-            field.appendChild(circle);
-            columnDiv.appendChild(field);
+            field.style.margin = fieldMargin;
+            if (column == 5) {
+                const fiveDiv = document.createElement("div");
+                const fiveDivMargin = calculateFiveDivMargin() + "px";
+                fiveDiv.setAttribute("class", "fiveDiv");
+                fiveDiv.style.margin = fiveDivMargin;
+                columnDiv.appendChild(fiveDiv);
+            } else {
+                columnDiv.appendChild(field);
+            }
         }
         document.getElementById("board").appendChild(columnDiv);
     }
@@ -74,34 +97,36 @@ window.onload = function () {
 window.addEventListener("resize", onresize);
 
 function onresize() {
-    const size = (window.innerWidth - 2 * 4 - 10 * 4 - 12) / 10 + "px";
+    const size = calculateFieldSize() + "px";
+    const fieldMargin= calculateFieldMargin() + "px";
     const fields = document.getElementsByClassName("field");
     for (let index = 0; index < fields.length; index++) {
         const field = fields[index];
         field.style.height = size;
         field.style.width = size;
+        field.style.margin = fieldMargin;
     }
-    const circles = document.getElementsByClassName("circle");
-    for (let index = 0; index < circles.length; index++) {
-        const ciecle = circles[index];
-        ciecle.style.height = size;
-        ciecle.style.width = size;
+    const fiveDivSize = calculateFiveDivMargin() + "px";
+    const fiveDivs = document.getElementsByClassName("fiveDiv");
+    for (let index = 0; index < fiveDivs.length; index++) {
+        const fiveDiv = fiveDivs[index];
+        fiveDiv.style.margin = fiveDivSize;
     }
 }
 
 function changeCircle(id) {
     const fields = document.getElementsByName(id);
-    const circle = fields[0].firstChild;
-    let color = window.getComputedStyle(circle).backgroundColor;
+    const field = fields[0];
+    let color = window.getComputedStyle(field).backgroundColor;
     switch (color) {
         case "rgb(255, 255, 255)":
-            circle.style.background = "rgb(30, 144, 255)";
+            field.style.background = "rgb(30, 144, 255)";
             break;
         case "rgb(30, 144, 255)":
-            circle.style.background = "rgb(220, 20, 60)";
+            field.style.background = "rgb(220, 20, 60)";
             break;
         default:
-            circle.style.background = "rgb(255, 255, 255)";
+            field.style.background = "rgb(255, 255, 255)";
             break;
     }
 }
