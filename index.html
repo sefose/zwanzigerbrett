@@ -16,9 +16,26 @@
             </div>
         </div>
     </div>
-    <div id="board"></div>
-    <div id="stoneChooser">
-        
+    <div id="board">
     </div>
+    <div id="stoneChooser">
+    </div>       
 </body>
+<footer>
+    <div id="donate-button-container">
+        <div id="donate-button"></div>
+            <script src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js" charset="UTF-8"></script>
+            <script>
+            PayPal.Donation.Button({
+            env:'production',
+            hosted_button_id:'FEXWWL6DTN578',
+            image: {
+            src:'https://www.paypalobjects.com/de_DE/DE/i/btn/btn_donate_LG.gif',
+            alt:'Spenden mit dem PayPal-Button',
+            title:'PayPal - The safer, easier way to pay online!',
+            }
+            }).render('#donate-button');
+            </script>
+        </div>        
+</footer>
 </html>
