@@ -1,16 +1,16 @@
 const layouts = {
     10: {
-        title: "Zehnerbrett",
+        title: "Zehnerfeld",
         rows: 1,
         columns: 10,
     },
     20: {
-        title: "Zwanzigerbrett",
+        title: "Zwanzigerfeld",
         rows: 2,
         columns: 10,
     },
     // "100" : {
-    //     "title": "Hunderterbrett",
+    //     "title": "Hunderterfeld",
     //     "rows": 10,
     //     "columns": 10,
     // },
