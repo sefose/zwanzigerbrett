@@ -1,3 +1,40 @@
+#header {
+    display: flex;
+    justify-content: center;
+}
+
+#header * {
+    margin: 10px;
+}
+
+#headline:hover, #headlinne.focus {
+    color: gray;
+}
+
+#headingMenu {
+    position: relative;
+    /* display: inline-block; */
+    display: flex;
+    justify-content: center;
+}
+
+#boardChooser {
+    display: none;
+    position: absolute;
+    background-color: white;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+#boardChooser div {
+    display: block;
+}
+
+#boardChooser div:hover {
+    color: gray;
+}
+
+
 #board {
    color: black;
    border: black;
