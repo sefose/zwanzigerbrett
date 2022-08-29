@@ -19,11 +19,11 @@ const layouts = {
 let currentLayout = "10";
 
 const calculateFiveDivMargin = () => {
-    return window.innerWidth / 60;
+    return Math.floor(window.innerWidth / 60);
 };
 
 const calculateFieldMargin = () => {
-    return window.innerWidth / 200;
+    return Math.floor(window.innerWidth / 200);
 }
 
 const calculateFieldSize = () => {
