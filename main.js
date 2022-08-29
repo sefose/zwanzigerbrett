@@ -19,11 +19,11 @@ const layouts = {
 let currentLayout = "10";
 
 const calculateFiveDivMargin = () => {
-    return Math.round(window.innerWidth / 60);
+    return window.innerWidth / 60;
 };
 
 const calculateFieldMargin = () => {
-    return Math.round(window.innerWidth / 200);
+    return window.innerWidth / 200;
 }
 
 const calculateFieldSize = () => {
@@ -40,8 +40,6 @@ const createBoard = () => {
         columnDiv.setAttribute("id", "column");
         const size = calculateFieldSize() + "px";
         const fieldMargin= calculateFieldMargin() + "px";
-        console.log(size)
-        console.log(fieldMargin)
         for (let row = 0; row < layouts[currentLayout].rows; row++) {
             const field = document.createElement("div");
             field.setAttribute("class", "field");
