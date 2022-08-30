@@ -17,6 +17,7 @@ const layouts = {
 };
 
 let currentLayout = "10";
+let currentStone = "blue";
 
 const calculateFiveDivMargin = () => {
     return Math.floor(window.innerWidth / 60);
@@ -24,10 +25,14 @@ const calculateFiveDivMargin = () => {
 
 const calculateFieldMargin = () => {
     return Math.floor(window.innerWidth / 200);
-}
+};
 
 const calculateFieldSize = () => {
-    return (window.innerWidth - 2 * 2 - 16 - calculateFiveDivMargin()*2) / 10 - calculateFieldMargin() *2 - 2 * 2;
+    return (
+        (window.innerWidth - 2 * 2 - 16 - calculateFiveDivMargin() * 2) / 10 -
+        calculateFieldMargin() * 2 -
+        2 * 2
+    );
 };
 
 const createBoard = () => {
@@ -39,7 +44,7 @@ const createBoard = () => {
         const columnDiv = document.createElement("div");
         columnDiv.setAttribute("id", "column");
         const size = calculateFieldSize() + "px";
-        const fieldMargin= calculateFieldMargin() + "px";
+        const fieldMargin = calculateFieldMargin() + "px";
         for (let row = 0; row < layouts[currentLayout].rows; row++) {
             const field = document.createElement("div");
             field.setAttribute("class", "field");
@@ -86,17 +91,10 @@ const setHeadline = () => {
         "<h1>" + layouts[currentLayout].title + "<h1>";
 };
 
-window.onload = function () {
-    setHeadline();
-    populateBoardChooser();
-    createBoard();
-};
 
-window.addEventListener("resize", onresize);
-
-function onresize() {
+const onresize = () => {
     const size = calculateFieldSize() + "px";
-    const fieldMargin= calculateFieldMargin() + "px";
+    const fieldMargin = calculateFieldMargin() + "px";
     const fields = document.getElementsByClassName("field");
     for (let index = 0; index < fields.length; index++) {
         const field = fields[index];
@@ -112,15 +110,22 @@ function onresize() {
     }
 }
 
-function changeCircle(id) {
-    const fields = document.getElementsByName(id);
-    const field = fields[0];
-    let color = window.getComputedStyle(field).backgroundColor;
-    switch (color) {
-        case "rgb(255, 255, 255)":
+window.onload = () => {
+    setHeadline();
+    populateBoardChooser();
+    createBoard();
+    onresize();
+};
+
+window.addEventListener("resize", onresize);
+
+const changeCircle = (id) => {
+    const field = document.getElementsByName(id).item(0);
+    switch (currentStone) {
+        case "blue":
             field.style.background = "rgb(30, 144, 255)";
             break;
-        case "rgb(30, 144, 255)":
+        case "red":
             field.style.background = "rgb(220, 20, 60)";
             break;
         default:
@@ -129,11 +134,17 @@ function changeCircle(id) {
     }
 }
 
-function getIndexOfKeyFromObject(key, object) {
+const pickStone = (color) => {
+    currentStone = color
+    document.getElementsByClassName("choosen").item(0).classList.remove("choosen")
+    document.getElementsByClassName(color).item(0).classList.add("choosen")
+}
+
+const getIndexOfKeyFromObject = (key, object) => {
     return Object.keys(object).findIndex((e) => e === key);
 }
 
-function switchBoard(direction) {
+const switchBoard = (direction) => {
     const currentIndex = getIndexOfKeyFromObject(currentLayout, layouts);
     if (direction == "up") {
     }

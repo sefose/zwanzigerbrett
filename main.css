@@ -7,12 +7,11 @@
     margin: 10px;
 }
 
-#headline:hover, #headlinne.focus {
+#headline:hover, #headline.focus {
     color: gray;
 }
 
 #headingMenu {
-    position: relative;
     /* display: inline-block; */
     display: flex;
     justify-content: center;
@@ -44,6 +43,17 @@
    border-radius: 10px;
 }
 
+#stoneChooser {
+    display: inline-block;
+    width: 100%;
+    padding-top: 2%;
+}
+
+#fieldwrapper {
+    display: flex;
+    justify-content: center;
+}
+
 .field {
     border: black;
     border-width: 2px;
@@ -51,6 +61,35 @@
     border-radius: 50%;
     background: white;
     /* margin: 5px; */
+}
+
+.white {
+    position: relative;
+    /* background: linear-gradient(to left top, transparent 47.75%, currentColor 49.5%, currentColor 50.5%, transparent 52.25%); */
+    /* background: rgb(255, 255, 255); */
+    background: linear-gradient(to right, rgb(30, 144, 255) 50%, rgb(220, 20, 60) 50%);
+}
+.white:before {
+    content: " ";
+    position: absolute;
+    left: -0.1em;
+    right: -0.1em;
+    top: 0.38em;
+    bottom: 0.38em;
+    background: linear-gradient(to left top, transparent 47.5%, currentColor 49%, currentColor 50%, transparent 52.5%);
+    pointer-events: none;
+  }
+
+.blue {
+    background: rgb(30, 144, 255);
+}
+
+.red {
+    background: rgb(220, 20, 60);
+}
+
+.choosen {
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.9);
 }
 
 #column {
